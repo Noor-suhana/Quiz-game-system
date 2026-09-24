@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz Game System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-shape shape1"></div>
+    <div class="background-shape shape2"></div>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">Q</div>
+
+            <div>
+                <h1>Quiz Game System</h1>
+                <p>Test Your C++ Programming Knowledge</p>
+            </div>
+        </header>
+
+
+        <!-- HOME SCREEN -->
+        <section id="homeScreen" class="screen active">
+
+            <div class="hero">
+
+                <div class="hero-icon">🧠</div>
+
+                <h2>Welcome to the Quiz!</h2>
+
+                <p>
+                    Challenge yourself with 10 multiple-choice
+                    questions based on C++ programming concepts.
+                </p>
+
+                <input
+                    type="text"
+                    id="playerName"
+                    placeholder="Enter your name"
+                    maxlength="30"
+                >
+
+                <!-- DIFFICULTY SELECTION -->
+                <div class="difficulty-section">
+
+                    <h3>Select Difficulty</h3>
+
+                    <div class="difficulty-options">
+
+                        <label class="difficulty-card">
+                            <input
+                                type="radio"
+                                name="difficulty"
+                                value="Easy"
+                                checked
+                            >
+
+                            <span class="difficulty-icon">🟢</span>
+
+                            <strong>Easy</strong>
+
+                            <small>
+                                20 sec • 1 mark
+                            </small>
+                        </label>
+
+
+                        <label class="difficulty-card">
+                            <input
+                                type="radio"
+                                name="difficulty"
+                                value="Medium"
+                            >
+
+                            <span class="difficulty-icon">🟡</span>
+
+                            <strong>Medium</strong>
+
+                            <small>
+                                15 sec • 2 marks
+                            </small>
+                        </label>
+
+
+                        <label class="difficulty-card">
+                            <input
+                                type="radio"
+                                name="difficulty"
+                                value="Hard"
+                            >
+
+                            <span class="difficulty-icon">🔴</span>
+
+                            <strong>Hard</strong>
+
+                            <small>
+                                10 sec • 3 marks
+                            </small>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <button id="startBtn" class="primary-btn">
+                    Start Quiz →
+                </button>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature-card">
+                    <span>📝</span>
+                    <h3>10 Questions</h3>
+                    <p>Test your C++ knowledge.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span>⚡</span>
+                    <h3>Timed Quiz</h3>
+                    <p>Answer before the time runs out.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span>🏆</span>
+                    <h3>Get Your Score</h3>
+                    <p>See your final performance.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUIZ SCREEN -->
+        <section id="quizScreen" class="screen">
+
+            <div class="quiz-top">
+
+                <div>
+                    <span class="small-label">PLAYER</span>
+                    <strong id="displayPlayerName">Player</strong>
+                </div>
+
+
+                <div>
+                    <span class="small-label">DIFFICULTY</span>
+                    <strong id="displayDifficulty">Easy</strong>
+                </div>
+
+
+                <div class="question-count">
+                    Question
+                    <span id="currentQuestion">1</span>
+                    /
+                    <span id="totalQuestions">10</span>
+                </div>
+
+            </div>
+
+
+            <!-- TIMER -->
+            <div class="timer-container">
+
+                <span>⏱️ Time Left:</span>
+
+                <strong id="timer">
+                    20
+                </strong>
+
+                <span>seconds</span>
+
+            </div>
+
+
+            <!-- PROGRESS BAR -->
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+
+            <div class="question-card">
+
+                <div class="question-number" id="questionNumber">
+                    QUESTION 1
+                </div>
+
+                <h2 id="questionText">
+                    Question appears here
+                </h2>
+
+                <div id="optionsContainer" class="options">
+
+                    <!-- Options generated by JavaScript -->
+
+                </div>
+
+
+                <div id="feedback" class="feedback"></div>
+
+
+                <button
+                    id="nextBtn"
+                    class="primary-btn next-btn"
+                    disabled
+                >
+                    Next Question →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT SCREEN -->
+        <section id="resultScreen" class="screen">
+
+            <div class="result-card">
+
+                <div class="result-icon">🏆</div>
+
+                <h2>Quiz Completed!</h2>
+
+                <p class="result-player">
+                    Well done,
+                    <strong id="resultPlayerName"></strong>!
+                </p>
+
+
+                <!-- DIFFICULTY -->
+                <div class="result-difficulty">
+
+                    <span>Difficulty</span>
+
+                    <strong id="resultDifficulty">
+                        Easy
+                    </strong>
+
+                </div>
+
+
+                <!-- SCORE -->
+                <div class="score-circle">
+
+                    <span id="percentage">
+                        0%
+                    </span>
+
+                    <small>
+                        Percentage
+                    </small>
+
+                </div>
+
+
+                <!-- RESULT DETAILS -->
+                <div class="result-details">
+
+                    <div>
+                        <span>Correct</span>
+                        <strong id="correctAnswers">
+                            0
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Wrong</span>
+                        <strong id="wrongAnswers">
+                            0
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Time Expired</span>
+                        <strong id="timedOutQuestions">
+                            0
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Score</span>
+                        <strong id="finalScore">
+                            0/10
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- PERFORMANCE -->
+                <div class="performance-box">
+
+                    <span>Performance</span>
+
+                    <strong id="performance">
+                        Excellent
+                    </strong>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+                <div class="result-buttons">
+
+                    <button
+                        id="playAgainBtn"
+                        class="primary-btn"
+                    >
+                        🔄 Play Again
+                    </button>
+
+
+                    <button
+                        id="homeBtn"
+                        class="secondary-btn"
+                    >
+                        🏠 Home
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PREVIOUS RESULTS -->
+        <section id="historyScreen" class="screen">
+
+            <div class="history-card">
+
+                <h2>📜 Previous Results</h2>
+
+                <p>
+                    Your previous quiz attempts are stored here.
+                </p>
+
+                <div id="historyList"></div>
+
+                <button
+                    id="historyHomeBtn"
+                    class="secondary-btn"
+                >
+                    🏠 Back to Home
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section id="leaderboardScreen" class="screen">
+
+        <div class="history-card">
+
+            <h2>🏆 Leaderboard</h2>
+
+            <p>
+                Top quiz scores are shown here.
+            </p>
+
+            <div id="leaderboardList"></div>
+
+            <button id="leaderboardHomeBtn" class="secondary-btn">
+                🏠 Back to Home
+            </button>
+
+    </div>
+
+</section>
+
+
+        <!-- HISTORY BUTTON -->
+        <button id="historyBtn" class="history-btn">
+            📜 View Previous Results
+        </button>
+
+        <!-- LEADERBOARD BUTTON -->
+        <button id="leaderboardBtn" class="history-btn">
+            🏆 Leaderboard
+        </button>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <p>
+                Quiz Game System • C++ Project
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
